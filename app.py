@@ -1,9 +1,10 @@
 import os
 from flask import Flask, request, jsonify
-from openai import OpenAI
+from openai import AzureOpenAI
 
 # Initialize Flask app
 app = Flask(__name__)
+
 
 # Azure OpenAI API configuration
 endpoint = "https://shant-mjjz4han-eastus2.cognitiveservices.azure.com/openai/v1"
@@ -11,10 +12,10 @@ deployment_name = "gpt-4o-standard"  # Make sure this is correct for your setup
 api_key = os.environ.get('API_KEY') # Replace with your actual API key
 
 # OpenAI client
-client = OpenAI(
+client = AzureOpenAI(
     base_url=endpoint,
     api_key=api_key
-)
+ )
 
 # Home route
 @app.route('/')
