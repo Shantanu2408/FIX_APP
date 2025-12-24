@@ -12,10 +12,6 @@ deployment_name = "gpt-4o-standard"  # Make sure this is correct for your setup
 api_key = os.environ.get('API_KEY') # Replace with your actual API key
 
 # OpenAI client
-client = AzureOpenAI(
-    base_url=endpoint,
-    api_key=api_key
- )
 
 # Home route
 @app.route('/')
@@ -25,6 +21,11 @@ def home():
 # Chat route (fixed to handle response properly)
 @app.route('/chat', methods=['POST'])
 def chat():
+    client = AzureOpenAI(
+        base_url=endpoint,
+        api_key=api_key,
+        api_version="2024-02-15-preview"
+ )
     try:
         # Get user input from the request
         user_input = request.json.get('message')
